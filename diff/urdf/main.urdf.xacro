@@ -1,0 +1,532 @@
+<?xml version="1.0"?>
+<robot
+	xmlns:xacro="http://www.ros.org/wiki/xacro"
+	name="diff">
+
+	<xacro:include filename="$(find diff)/urdf/roller.urdf.xacro"/>
+
+	<link name="base_footprint"/> 
+	<link name="base_link">
+
+	<inertial>
+		<mass value="0.07862944645"/>
+		<inertia
+			ixx="0.00002035985530754"
+			ixy="0"
+			ixz="0"
+			iyy="0.00002035985530754"
+			iyz="0"
+			izz="0.00003945961663220"
+		/>
+
+	</inertial>
+
+	<visual>
+		<geometry>
+			<mesh filename="package://diff/mesh/base_cift.stl" scale="0.0007 0.0007 0.0007"/>
+		</geometry>
+		<material name="base_material">
+			<color rgba="0 0 0 1"/>
+		</material>
+	</visual>
+
+	<collision>
+		<geometry>
+			<mesh filename="package://diff/mesh/base_cift.stl" scale="0.0007 0.0007 0.0007"/>
+		</geometry>
+	</collision>
+
+	</link>
+	<joint name="base_joint" type="fixed">
+		<parent link="base_footprint" />
+		<child link="base_link" />
+		<origin xyz="0 0 0"/>
+	</joint>
+
+	<link name="rim_left_link">
+
+		<inertial>
+
+			<origin xyz="0 0 -0.000343"/>
+			<mass value="0.00835758"/>
+			<inertia
+				ixx="6.63684e-07"
+				ixy="0"
+				ixz="0"
+				iyy="6.63684e-07"
+				iyz="0"
+				izz="9.40333e-07"
+			/>
+
+		</inertial>
+		<visual>
+
+			<geometry>
+				<mesh filename="package://diff/mesh/rim.stl"/>
+			</geometry>
+			<material name="rim_left_material">
+				<color rgba="0 0 1 1"/>
+			</material>
+
+		</visual>
+		<collision>
+			<geometry>
+				<mesh filename="package://diff/mesh/rim.stl"/>
+			</geometry>
+		</collision>
+
+	</link>
+	<joint
+		name="rim_left_joint"
+		type="continuous"
+	>
+
+		<parent link="base_link" />
+		<child link="rim_left_link" />
+		<axis xyz="0 0 1"/>
+		<origin
+			xyz="+0.067 -0.0337 0.0165"
+			rpy="0 1.57079 -0.523598776"
+		/>
+
+	</joint>
+<!-- //////////////////////////////////////////////////////////////////////////////////////// -->
+	<link name="rim_right_link">
+
+		<inertial>
+
+			<origin xyz="0 0 -0.000343"/>
+			<mass value="0.00835758"/>
+			<inertia
+				ixx="6.63684e-07"
+				ixy="0"
+				ixz="0"
+				iyy="6.63684e-07"
+				iyz="0"
+				izz="9.40333e-07"
+			/>
+
+		</inertial>
+		<visual>
+
+			<geometry>
+				<mesh filename="package://diff/mesh/rim.stl"/>
+			</geometry>
+			<material name="rim_right_material">
+				<color rgba="0 1 0 1"/>
+		
+			</material>
+
+		</visual>
+		<collision>
+			<geometry>
+				<mesh filename="package://diff/mesh/rim.stl"/>
+			</geometry>
+		</collision>
+
+	</link>
+
+	<joint
+		name="rim_right_joint"
+		type="continuous"
+	>
+
+		<parent link="base_link" />
+		<child link="rim_right_link" />
+		<axis xyz="0 0 1"/>
+		<origin
+			xyz="-0.067 -0.0337 0.0165"
+			rpy="0 1.57079 0.523598776"
+		/>
+
+	</joint>
+
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<link name="rim_back_link">
+
+		<inertial>
+
+			<origin xyz="0 0 -0.000343"/>
+			<mass value="0.00835758"/>
+			<inertia
+				ixx="6.63684e-07"
+				ixy="0"
+				ixz="0"
+				iyy="6.63684e-07"
+				iyz="0"
+				izz="9.40333e-07"
+			/>
+
+		</inertial>
+		<visual>
+
+			<geometry>
+				<mesh filename="package://diff/mesh/rim.stl" />
+			</geometry>
+			<material name="rim_back_material">
+				<color rgba="1 0 0 1"/>
+			</material>
+
+		</visual>
+		<collision>
+			<geometry>
+				<mesh filename="package://diff/mesh/rim.stl" />
+			</geometry>
+		</collision>
+
+	</link>
+
+	<joint
+		name="rim_back_joint"
+		type="continuous"
+	>
+
+		<parent link="base_link" />
+		<child link="rim_back_link" />
+		<axis xyz="0 0 1"/>
+		<origin
+			xyz="0 0.082 0.0165"
+			rpy="-1.570796326794896 0 3.141592653589793"
+		/>
+
+	</joint>
+
+<!-- ************************************************************************************************************* -->
+	<xacro:roller_macro
+		parent="left"
+		name="e"
+		xyz="0.01355 0 0.0055"
+		rpy="-1.570796326794896 0 0"
+	/>
+	<xacro:roller_macro
+		parent="left"
+		name="ne"
+		xyz="0.00958129689 0.00958129689 -0.0055"
+		rpy="-1.570796326794896 0 0.7853981633974483"
+	/>
+	<xacro:roller_macro
+		parent="left"
+		name="n"
+		xyz="0 0.01355 0.0055"
+		rpy="-1.570796326794896 0 1.570796326794896"
+	/>
+	<xacro:roller_macro
+		parent="left"
+		name="nw"
+		xyz="-0.00958129689 0.00958129689 -0.0055"
+		rpy="-1.570796326794896 0 2.356194490192345"
+	/>
+	<xacro:roller_macro
+		parent="left"
+		name="w"
+		xyz="-0.01355 0 0.0055"
+		rpy="-1.570796326794896 0 3.141592653589793"
+	/>
+	<xacro:roller_macro
+		parent="left"
+		name="sw"
+		xyz="-0.00958129689 -0.00958129689 -0.0055"
+		rpy="-1.570796326794896 0 -2.356194490192345"
+	/>
+	<xacro:roller_macro
+		parent="left"
+		name="s"
+		xyz="0 -0.01355 0.0055"
+		rpy="-1.570796326794896 0 -1.570796326794896"
+	/>
+	<xacro:roller_macro
+		parent="left"
+		name="se"
+		xyz="0.00958129689 -0.00958129689 -0.0055"
+		rpy="-1.570796326794896 0 -0.7853981633974483"
+	/>
+
+<!-- ********************************************************************************************************************** -->
+	<xacro:roller_macro
+		parent="right"
+		name="e"
+		xyz="0.01355 0 0.0055"
+		rpy="-1.570796326794896 0 0"
+	/>
+	<xacro:roller_macro
+		parent="right"
+		name="ne"
+		xyz="0.00958129689 0.00958129689 -0.0055"
+		rpy="-1.570796326794896 0 0.7853981633974483"
+	/>
+	<xacro:roller_macro
+		parent="right"
+		name="n"
+		xyz="0 0.01355 0.0055"
+		rpy="-1.570796326794896 0 1.570796326794896"
+	/>
+	<xacro:roller_macro
+		parent="right"
+		name="nw"
+		xyz="-0.00958129689 0.00958129689 -0.0055"
+		rpy="-1.570796326794896 0 2.356194490192345"
+	/>
+	<xacro:roller_macro
+		parent="right"
+		name="w"
+		xyz="-0.01355 0 0.0055"
+		rpy="-1.570796326794896 0 3.141592653589793"
+	/>
+	<xacro:roller_macro
+		parent="right"
+		name="sw"
+		xyz="-0.00958129689 -0.00958129689 -0.0055"
+		rpy="-1.570796326794896 0 -2.356194490192345"
+	/>
+	<xacro:roller_macro
+		parent="right"
+		name="s"
+		xyz="0 -0.01355 0.0055"
+		rpy="-1.570796326794896 0 -1.570796326794896"
+	/>
+	<xacro:roller_macro
+		parent="right"
+		name="se"
+		xyz="0.00958129689 -0.00958129689 -0.0055"
+		rpy="-1.570796326794896 0 -0.7853981633974483"
+	/>
+<!-- ******************************************************************************************************************************* -->
+	<xacro:roller_macro
+		parent="back"
+		name="e"
+		xyz="0.01355 0 0.0055"
+		rpy="-1.570796326794896 0 0"
+	/>
+	<xacro:roller_macro
+		parent="back"
+		name="ne"
+		xyz="0.00958129689 0.00958129689 -0.0055"
+		rpy="-1.570796326794896 0 0.7853981633974483"
+	/>
+	<xacro:roller_macro
+		parent="back"
+		name="n"
+		xyz="0 0.01355 0.0055"
+		rpy="-1.570796326794896 0 1.570796326794896"
+	/>
+	<xacro:roller_macro
+		parent="back"
+		name="nw"
+		xyz="-0.00958129689 0.00958129689 -0.0055"
+		rpy="-1.570796326794896 0 2.356194490192345"
+	/>
+	<xacro:roller_macro
+		parent="back"
+		name="w"
+		xyz="-0.01355 0 0.0055"
+		rpy="-1.570796326794896 0 3.141592653589793"
+	/>
+	<xacro:roller_macro
+		parent="back"
+		name="sw"
+		xyz="-0.00958129689 -0.00958129689 -0.0055"
+		rpy="-1.570796326794896 0 -2.356194490192345"
+	/>
+	<xacro:roller_macro
+		parent="back"
+		name="s"
+		xyz="0 -0.01355 0.0055"
+		rpy="-1.570796326794896 0 -1.570796326794896"
+	/>
+	<xacro:roller_macro
+		parent="back"
+		name="se"
+		xyz="0.00958129689 -0.00958129689 -0.0055"
+		rpy="-1.570796326794896 0 -0.7853981633974483"
+	/>
+<!-- //////////////////////////////////////////// -->
+	<link name = "laser_scanner">
+		<visual>
+		<origin xyz="0 0 0.0385" rpy="0 0 0" />
+		<geometry>
+			<cylinder length="0.015" radius="0.025" />
+		</geometry>
+		<material name="yellow">
+			<color rgba="0 0 1 1"/>
+		</material>
+		</visual>
+	</link>
+
+	<joint name="laser_scanner_joint" type="fixed">
+		<parent link = "base_link"/>
+		<child link = "laser_scanner"/>
+		<origin xyz="0 0 0.0385" rpy="0 0 0"/>
+	</joint>
+
+	<gazebo reference="laser_scanner">
+		<sensor name="laser" type="ray">
+		<pose>0 0 0 0 0 0</pose>
+		<visualize>true</visualize>
+		<update_rate>40</update_rate>
+		<ray>
+			<scan>
+			<horizontal>
+				<sample>720</sample>
+				<resolution>1</resolution>
+				<min_angle>-1.578</min_angle>
+				<max_angle>1.578</max_angle>
+			</horizontal>
+			</scan>
+			<range>
+			<min>0.1</min>
+			<max>10</max>
+			<resolution>0.1</resolution>
+			</range>
+		</ray>
+
+		<plugin name="lidar" filename="libgazebo_ros_laser.so">
+			<topicName>/scan</topicName>
+			<frameName>laser_scanner</frameName>
+		</plugin>
+	</sensor>
+	</gazebo>
+
+
+
+
+<!-- //////////////////////////////////////////// -->
+	<gazebo>
+		<plugin name="omni_bot_controller" filename="libgazebo_ros_diff_drive.so">
+			<leftJoint>rim_left_joint</leftJoint>
+			<rightJoint>rim_right_joint</rightJoint>
+			<legacyMode>false</legacyMode>
+			<robotBaseFrame>base_footprint</robotBaseFrame>
+			<wheelSeparation>0.25</wheelSeparation>
+			<wheelDiameter>0.07</wheelDiameter>
+			<publishWheelJointState>true</publishWheelJointState>  
+		</plugin>
+	</gazebo>
+
+
+	<gazebo>
+		<plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+			<jointName>rim_back_joint, rim_back_joint</jointName>
+		</plugin>
+	</gazebo>
+
+	<!-- ******************************************************************************* -->
+
+	<gazebo reference="base_link">
+		<material>Gazebo/Black</material>
+	</gazebo>
+	<gazebo reference="laser">
+		<material>Gazebo/Blue</material>
+	</gazebo>
+	<gazebo reference="rim_back_link">
+		<material>Gazebo/Red</material>
+	</gazebo>
+	
+	<gazebo reference="rim_right_link">
+		<material>Gazebo/Green</material>
+	</gazebo>
+
+	<gazebo reference="rim_left_link">
+		<material>Gazebo/Blue</material>
+	</gazebo>
+	
+	<gazebo reference="rim_left_link">
+		<material>Gazebo/Blue</material>
+	</gazebo>
+<!-- ************************************************************ -->
+	<gazebo reference="roller_e_rim_back_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+	<gazebo reference="roller_ne_rim_back_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+	<gazebo reference="roller_n_rim_back_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+	<gazebo reference="roller_nw_rim_back_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+	<gazebo reference="roller_w_rim_back_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+	<gazebo reference="roller_sw_rim_back_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+	<gazebo reference="roller_s_rim_back_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+	<gazebo reference="roller_se_rim_back_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+<!-- ************************************************************ -->
+	<gazebo reference="roller_e_rim_left_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+	<gazebo reference="roller_ne_rim_left_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+	<gazebo reference="roller_n_rim_left_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+	<gazebo reference="roller_nw_rim_left_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+	<gazebo reference="roller_w_rim_left_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+	<gazebo reference="roller_sw_rim_left_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+	<gazebo reference="roller_s_rim_left_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+	<gazebo reference="roller_se_rim_left_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+<!-- ************************************************************ -->
+	<gazebo reference="roller_e_rim_right_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+	<gazebo reference="roller_ne_rim_right_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+	<gazebo reference="roller_n_rim_right_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+	<gazebo reference="roller_nw_rim_right_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+	<gazebo reference="roller_w_rim_right_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+	<gazebo reference="roller_sw_rim_right_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+	<gazebo reference="roller_s_rim_right_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+	<gazebo reference="roller_se_rim_right_link">
+		<material>Gazebo/Black</material>
+	</gazebo> 
+
+
+
+</robot>

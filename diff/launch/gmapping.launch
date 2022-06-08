@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+    <param name="robot_description" textfile="$(find diff)/urdf/main.urdf.xacro" />
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
+    
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"  args="-param robot_description -urdf -model diff" />
+
+    <node name="Rsp" pkg="robot_state_publisher" type="robot_state_publisher" output="screen"/>
+
+    <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d $(find explorer_bot)/config/map.rviz"/>
+
+
+    <node pkg="gmapping" type="slam_gmapping" name="maping_node">
+        <param name="base_frame" value="base_footprint" />
+        <param name="odom_frame" value="odom" />
+        <param name="delta" value="0.1" />
+    </node>
+
+
+</launch>
