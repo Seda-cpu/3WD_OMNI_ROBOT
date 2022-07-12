@@ -21,6 +21,7 @@ roslaunch diff rviz.launch
 ```
 ![Screenshot from 2022-07-12 21-13-45](https://user-images.githubusercontent.com/74606830/178565063-1f780ccb-dd4d-4c28-a404-c01b1e4f0e97.png)
 
+ * Wheels model from here: https://github.com/GuiRitter/OpenBase
 
 # ROBOT KINEMATICS
 
