@@ -60,4 +60,21 @@ rosrun teleop_twist_keyboard teleop_twist_keyboard
 
 https://www.youtube.com/watch?v=_wcQZBHmdKQ&t=4s
 
+* Here is the real robot
+![0](https://user-images.githubusercontent.com/74606830/178567926-40184dff-ba53-447d-88e9-74caa29f06ed.png)
 
+When we control the real robot first we need to activate RPLidar.
+```ruby
+ls -l /dev |grep ttyUSB
+```
+```ruby
+sudo chmod 666 /dev/ttyUSB0
+```
+```ruby
+roslaunch rplidar_ros view_rplidar.launch
+```
+* Then we start rosserial
+```ruby
+rosrun rosserial_arduino serial_node.py /dev/ttyUSB1
+```
+After starting the comminication between ros and arduino. You can launch the hector slam node and start to mapping.
