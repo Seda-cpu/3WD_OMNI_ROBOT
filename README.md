@@ -61,6 +61,8 @@ rosrun teleop_twist_keyboard teleop_twist_keyboard
 https://www.youtube.com/watch?v=_wcQZBHmdKQ&t=4s
 
 * Here is the real robot
+
+
 ![0](https://user-images.githubusercontent.com/74606830/178567926-40184dff-ba53-447d-88e9-74caa29f06ed.png)
 
 When we control the real robot first we need to activate RPLidar.
